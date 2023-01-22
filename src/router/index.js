@@ -6,9 +6,17 @@ import { FirebaseAuth } from '../firebase/config.js'
 //Route Guard - Auth Guard
 const requireAuth = (to, from, next) => {
   let user = FirebaseAuth.currentUser
-  console.log('Current User in Auth Guard:', user)
   if(!user){
     next({name:'Welcome'})
+  } else {
+    next()
+  }
+}
+
+const requireNoAuth = (to, from, next) => {
+  let user = FirebaseAuth.currentUser
+  if(user){
+    next({name:'Chatroom'})
   } else {
     next()
   }
@@ -18,7 +26,8 @@ const routes = [
   {
     path: '/',
     name: 'Welcome',
-    component: Welcome
+    component: Welcome,
+    beforeEnter: requireNoAuth
   },
   {
     path: '/chatroom',

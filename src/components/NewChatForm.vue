@@ -5,8 +5,8 @@
         v-model="message"
         @keypress.enter.prevent="handleSubmit"
     ></textarea>
-    <div class="error">{{ error }}</div>
   </form>
+  <div class="error">{{ error }}</div>
 </template>
 
 <script>
